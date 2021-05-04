@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 });
 
 // Handle phone number submission
-app.post('/step2', function (req, res) {
+app.post('/step2', async function (req, res) {
   var number = req.body.number;
       // Start the verification process
   verifyRequestNumber = req.body.number;
