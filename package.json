@@ -1,7 +1,9 @@
 {
   "name": "node-messagebird-verify-example",
   "main": "index.js",
-  "start": "node index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "btoa": "^1.2.1",
