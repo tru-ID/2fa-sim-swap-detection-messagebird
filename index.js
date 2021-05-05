@@ -27,17 +27,25 @@ app.get('/', function (req, res) {
 // Handle phone number submission
 app.post('/step2', async function (req, res) {
   var number = req.body.number;
- 
+
   //create access token
   const accessToken = await createAccessToken();
   // perform SIMCheck
-  const no_sim_change = await performSimCheck(
+  const { number_not_supported, sim_changed } = await performSimCheck(
     number,
     accessToken
   );
-  if(!no_sim_change){
-      return res.render('sim-changed')
-      
+  if (sim_changed) {
+    return res.render('error', {
+      error:
+        'Verification Failed. SIM changed too recently. Please contact your network operator.',
+    });
+  }
+  if (number_not_supported) {
+    return res.render('error', {
+      error:
+        'Verification Failed. We do not support the phone number. Please contact your network operator.',
+    });
   }
   // Make request to Verify API
   messagebird.verify.create(
