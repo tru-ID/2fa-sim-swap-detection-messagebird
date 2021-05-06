@@ -31,20 +31,20 @@ app.post('/step2', async function (req, res) {
   //create access token
   const accessToken = await createAccessToken();
   // perform SIMCheck
-  const { number_not_supported, sim_changed } = await performSimCheck(
+  const { simChanged, numberSupported } = await performSimCheck(
     number,
     accessToken
   );
-  if (sim_changed) {
+  if (simChanged === true) {
     return res.render('error', {
       error:
-        'Verification Failed. SIM changed too recently. Please contact your network operator.',
+        'Verification Failed. SIM changed too recently. Please contact support.',
     });
   }
-  if (number_not_supported) {
+  if (numberSupported === false) {
     return res.render('error', {
       error:
-        'Verification Failed. We do not support the phone number. Please contact your network operator.',
+        'Verification Failed. We do not support the phone number. Please contact support.',
     });
   }
   // Make request to Verify API
