@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-exports.performSimCheck = async (phone_number, access_token) => {
+exports.performSimCheck = async (phoneNumber, accessToken) => {
   let simChanged
   let numberSupported = true
 
