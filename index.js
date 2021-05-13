@@ -14,14 +14,39 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended : true }));
 
+const { createAccessToken } = require('./helpers/createAccessToken')
+const { performSimCheck } = require('./helpers/performSimCheck')
+
 // Display page to ask the user for their phone number
 app.get('/', function(req, res) {
     res.render('step1');
 });
 
 // Handle phone number submission
-app.post('/step2', function(req, res) {
+app.post('/step2', async function(req, res) {
     var number = req.body.number;
+
+    //create access token
+    const accessToken = await createAccessToken()
+
+    // perform SIMCheck
+    const { simChanged, numberSupported } = await performSimCheck(
+        number,
+        accessToken,
+    )
+    
+    if (simChanged === true) {
+        return res.render('error', {
+            error:
+            'Verification Failed. SIM changed too recently. Please contact support.',
+        })
+    }
+    if (numberSupported === false) {
+        return res.render('error', {
+            error:
+            'Verification Failed. We do not support the phone number. Please contact support.',
+        })
+    }
     
     // Make request to Verify API
     messagebird.verify.create(number, {
