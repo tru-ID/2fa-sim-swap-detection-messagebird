@@ -5,7 +5,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
     "btoa": "^1.2.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",

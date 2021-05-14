@@ -1,8 +1,6 @@
 // Load Dependencies
 var express = require('express');
 var exphbs = require('express-handlebars');
-var bodyParser = require('body-parser');
-
 // Load configuration from .env file
 require('dotenv').config();
 
@@ -17,7 +15,7 @@ const { performSimCheck } = require('./helpers/performSimCheck');
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Display page to ask the user for their phone number
 app.get('/', function (req, res) {
