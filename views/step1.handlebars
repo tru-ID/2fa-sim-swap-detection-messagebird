@@ -1,7 +1,7 @@
 {{#if error}}
-    <p>{{error}}</p>
+    <p class="heading">{{error}}</p>
 {{/if}}
-<p>Please enter your phone number (in international format, starting with +) to receive a verification code:</p>
+<p class="heading">Please enter your phone number (in international format, starting with +) to receive a verification code:</p>
 <form method="post" action="/step2">
     <input type="tel" name="number" />
     <input type="submit" value="Send code" />
