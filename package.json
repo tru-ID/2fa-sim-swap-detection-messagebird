@@ -8,6 +8,6 @@
      "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
-    "messagebird": "^3.6.4",
+    "messagebird": "^3.6.4"
   }
 }
