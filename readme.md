@@ -26,7 +26,7 @@ git clone -b main https://github.com/tru-ID/2fa-sim-swap-detection-messagebird.g
 
 Next you need to configure MessageBird's credentials
 
-Copy the values of `example.env` into a `.env` file via:
+Copy the values of `.example.env` into a `.env` file via:
 
 ```
 cd 2fa-sim-swap-detection-messagebird && cp example.env .env
